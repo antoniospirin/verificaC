@@ -1,0 +1,168 @@
+#include <stdio.h> 
+#include <string.h>
+ void menu ();
+void moltiplica ();
+void dividi ();
+void ins_string();
+void uscita();
+void scelta(); 
+void sceltaAvanti(); 
+void menu2();
+int main() 
+
+{
+	menu();
+	scelta();
+	menu2();
+sceltaAvanti();
+}
+
+void menu ()
+{
+	printf ("Benvenuto, sono un assitente digitale, posso aiutarti a sbrigare alcuni compiti\n");
+	printf ("Come posso aiutarti?\n");
+	printf ("A >> Moltiplicare due numeri\nB >> Dividere due numeri\nC >> Inserire una stringa\nX >>esci\n");
+
+}
+void moltiplica(){
+
+char input[100];
+      int a, b, prodotto;
+       
+  do {
+        printf("Inserisci il primo numero intero: ");
+        scanf("%s", input);
+        if (strchr(input, ',' ) != NULL ) {
+            printf("Hai inserito un valore con la virgola. Riprova.\n");
+        } else if (sscanf(input, "%d", &a) != 1) {
+            printf("Hai inserito un valore non valido. Riprova.\n");
+        }
+    } while (strchr(input, ',') != NULL ||strchr(input, '.')!= NULL ||sscanf(input, "%d", &a) != 1);
+
+    printf("Hai inserito il numero intero %d\n", a);
+
+    do {
+        printf("Inserisci il secondo numero intero: ");
+        scanf("%s", input);
+        if (strchr(input, ',') != NULL) {
+            printf("Hai inserito un valore con la virgola. Riprova.\n");
+        } else if (sscanf(input, "%d", &b) != 1) {
+            printf("Hai inserito un valore non valido. Riprova.\n");
+        }
+    } while (strchr(input, ',') != NULL ||strchr(input, '.')!= NULL ||sscanf(input, "%d", &b) != 1);
+
+    printf("Hai inserito il numero intero %d\n", b);
+
+    prodotto = a * b; 
+    
+    printf("Il prodotto tra %d e %d è: %d\n", a, b, prodotto); 
+  
+}
+
+void dividi() {
+  float a, b = 0;
+    
+    printf("Inserisci il numeratore: ");
+    scanf("%f", &a);
+    
+    do
+    {
+        printf("Inserisci il denominatore diverso da zero: ");
+        scanf("%f", &b);
+        
+        if (b == 0)
+        {
+            printf("Il denominatore non può essere zero. Riprova.\n");
+        }
+    } while (b == 0);
+    
+    float divisione = a / b;
+
+    printf("La divisione tra %f e %f è: %f\n", a, b, divisione);
+}
+
+void ins_string() {
+    char stringa[100];
+    int lunghezza_massima = 10;
+
+    do {printf("Inserisci la stringa: ");
+    scanf("\n%[^\n]s", stringa);
+    if (strlen(stringa) > lunghezza_massima) {
+        printf("La stringa è troppo lunga, rinseriscii.\n");
+        scanf("\n%[^\n]s", stringa) ;}
+      } while(strlen (stringa)> lunghezza_massima) ;
+        
+
+    printf("Hai inserito la seguente stringa: %s\n", stringa);
+} 
+void uscita() {
+    int sceltau=0; 
+    do{printf("sei sicuro di voler uscire? 1 per confermare 2 per ritornare nel menù") ;
+     scanf( "%d" , &sceltau);
+    if (sceltau == 1){ break;  }
+    else if (sceltau == 2)
+    { scelta();
+} } 
+ while(sceltau !=1 || sceltau !=2);
+} 
+
+
+void scelta(){ 
+char scelta ; 
+	int sceltaValida=0; 
+	menu();
+        do {  
+	scanf ("%c", &scelta);
+
+	switch (scelta)
+	{
+		case 'A':
+		moltiplica(); 
+		sceltaValida= 1;
+		break;
+		case 'B':
+        dividi();
+        sceltaValida= 1;
+                break;
+		case 'C':
+                ins_string(); 
+                sceltaValida= 1;
+        break; 
+        case 'x':
+            uscita();
+            sceltaValida=1;
+            break;
+        default:
+        printf("scelta non valida.\n");
+        break;
+	} 
+    }	 while(sceltaValida==0);
+      }   
+      
+   void sceltaAvanti(){ 
+       char sceltam;
+    char x = 'x';
+    char m = 'm';
+
+    do {
+        printf("Scegli se rimanere con 'm' e se uscire con 'x': ");
+        scanf(" %c", &sceltam); // Aggiunto uno spazio prima di %c per evitare il problema di newline nel buffer
+
+        switch (sceltam) {
+            case 'x':
+                uscita();
+                break;
+            case 'm':
+                main();
+                break;
+            default:
+                printf("Scelta non valida. Riprova.\n");
+        }
+
+    } while (sceltam != x && sceltam != m);
+}
+
+void menu2(){
+    printf("scegli se continuare o no");
+    printf("x esci\n m rimani\n");
+}
